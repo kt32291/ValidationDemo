@@ -1,38 +1,71 @@
 <div ng-controller="UsersCtrl">
   <form accept-charset="UTF-8" action method="post" name="user_form" novalidate ng-submit="addUser($event)">
+
+<!-- FIRST NAME -->
     <fieldset>
       <%= label_tag :first_name, "First name", class: 'small-label' %>
-      <div class="error" id="error_explanation" ng-show="user_form.first_name.$invalid && user_form.submitted">
-        <small class="error" ng-show="user_form.first_name.$error.required">First name is required.</small>
+
+      <div ng-messages="user_form.first_name.$error">
+        <div ng-message="required">
+          You forgot to enter your first name...
+        </div>
       </div>
+
       <input id="first_name" name="first_name" ng-model="first_name" type="text" required />
     </fieldset>
+
+<!-- LAST NAME -->
     <fieldset class="half-group last">
       <%= label_tag :last_name, "Last name", class: 'small-label' %>
-      <div class="error" id="error_explanation" ng-show="user_form.last_name.$invalid && user_form.submitted">
-        <small class="error" ng-show="user_form.last_name.$error.required">Last name is required.</small>
+
+      <div ng-messages="user_form.last_name.$error">
+        <div ng-message="required">
+          You forgot to enter your last name...
+        </div>
       </div>
+
       <input id="last_name" name="last_name" ng-model="last_name" type="text" required />
     </fieldset>
+
+<!-- USERNAME -->
     <fieldset class="half-group last">
       <%= label_tag :username, "Username", class: 'small-label' %>
-      <div class="error" id="error_explanation" ng-show="user_form.username.$invalid && user_form.submitted">
-        <small class="error" ng-show="user_form.username.$error.required">Username is required.</small>
-        <small class="error" ng-show="user_form.username.$error.valid">Username must be valid.</small>
+
+      <div ng-messages="user_form.username.$error">
+        <div ng-message="required">
+          You forgot to enter a username...
+        </div>
+        <div ng-message="valid">
+          Username must be valid
+        </div>
       </div>
+
       <input id="username" name="username" ng-model="username" type="text" username-valid required />
     </fieldset>
+
+
+<!-- EMAIL -->
     <fieldset class="full-group">
       <%= label_tag :email, "Enter the user's email address", class: 'small-label' %>
-      <div class="error" id="error_explanation" ng-show="user_form.email.$invalid && user_form.submitted">
-        <small class="error" ng-show="user_form.email.$error.email">That is not a valid email. Please input a valid email.</small>
-        <small class="error" ng-show="user_form.email.$error.required">Your email is required.</small>
-        <small class="error" ng-show="user_form.email.$error.unique && user_form.email.$dirty">You've already invited this user.</small>
+
+      <div ng-messages="user_form.email.$error">
+        <div ng-message="required">
+          You forgot to enter your email...
+        </div>
+        <div ng-message="email">
+          Not a valid email
+        </div>
+        <div ng-message="unique">
+          You've already invited that user
+        </div>
       </div>
+
       <input id="email" name="email" ng-model="email" type="email" email-unique required />
     </fieldset>
+
     <%= submit_tag 'Invite User', class: 'button button-green', "ng-class" => "{ button_progress: sending }" %>
   </form>
+
   <ul>
     <li ng-repeat="user in users">{{ user.first_name }}</li>
   </ul>
