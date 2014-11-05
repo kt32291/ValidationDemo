@@ -14,5 +14,7 @@
 //= require jquery_ujs
 //= require angular
 //= require angular-resource
-//= require twitter/bootstrap
+//= require angular-messages
+//= require angular-animate
 //= require_tree .
+
