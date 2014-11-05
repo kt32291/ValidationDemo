@@ -1,3 +1,61 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.form-container {
+  max-width: 960px;
+  margin: 0px auto;
+  font-family: Helvetica;
+  h1 {
+    text-align: center;
+    margin-top: 45px;
+    font-weight: lighter;
+  }
+}
+
+form {
+  width: 400px;
+  margin: 30px auto;
+  padding: 15px 10px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  &.ng-valid {
+    border-color: black;
+  }
+  input[type='text'], input[type='email'] {
+    // width: 100%;
+    display: block;
+    width: 97%;
+    margin-right: 0px;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    line-height: 20px;
+    padding: 5px;
+    background: none;
+    outline-width: 0;
+    border: 2px solid lightgray;
+    &.ng-valid.ng-dirty {
+      border-color: forestgreen;
+    }
+    &.ng-invalid.ng-dirty {
+      border-color: crimson;
+    }
+  }
+  .ng-active {
+    margin: 5px 0px 15px 0px;
+    color: crimson;
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+  input[type='submit'] {
+    width: 100%;
+    background: none;
+    border: none;
+    background: dodgerblue;
+    line-height: 30px;
+    border-radius: 5px;
+    &:disabled {
+      background: lightblue;
+    }
+  }
+}

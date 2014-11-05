@@ -14,7 +14,6 @@ gem "font-awesome-rails"
 gem 'foreman'
 gem 'figaro'
 gem 'newrelic_rpm'
-gem "twitter-bootstrap-rails"
 gem 'friendly_id', '~> 5.0.0'
 
 group :production, :staging do

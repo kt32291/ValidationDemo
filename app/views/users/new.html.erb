@@ -1,56 +1,63 @@
-<div ng-controller="UsersCtrl">
+<div class="form-container" ng-controller="UsersCtrl">
+
+<h1>Sign Up</h1>
+
   <form accept-charset="UTF-8" action method="post" name="user_form" novalidate ng-submit="addUser($event)">
 
 <!-- FIRST NAME -->
-    <fieldset>
+    <div class='form-block'>
       <%= label_tag :first_name, "First name", class: 'small-label' %>
 
-      <div ng-messages="user_form.first_name.$error">
-        <div ng-message="required">
-          You forgot to enter your first name...
+      <div ng-messages="user_form.first_name.$error" ng-show="user_form.first_name.$dirty" class="my-messages">
+        <div ng-message="required" class="error-message">
+          First name is required
         </div>
       </div>
 
-      <input id="first_name" name="first_name" ng-model="first_name" type="text" required />
-    </fieldset>
+      <input id="first_name" name="first_name" ng-model="first_name" ng-model-options="{ debounce: 800 }" type="text" required />
+    </div>
 
 <!-- LAST NAME -->
-    <fieldset class="half-group last">
+    <div class='form-block'>
       <%= label_tag :last_name, "Last name", class: 'small-label' %>
 
-      <div ng-messages="user_form.last_name.$error">
-        <div ng-message="required">
-          You forgot to enter your last name...
+      <div ng-messages="user_form.last_name.$error" ng-show="user_form.last_name.$dirty" class="my-messages">
+        <div ng-message="required" class="error-message">
+          Last name is required
         </div>
       </div>
 
-      <input id="last_name" name="last_name" ng-model="last_name" type="text" required />
-    </fieldset>
+      <input id="last_name" name="last_name" ng-model="last_name" ng-model-options="{ debounce: 800 }" type="text" required />
+    </div>
 
 <!-- USERNAME -->
-    <fieldset class="half-group last">
-      <%= label_tag :username, "Username", class: 'small-label' %>
-
-      <div ng-messages="user_form.username.$error">
+    <div>
+      <!-- Label -->
+      <label for="username">Username</label>
+      <!-- Errors -->
+      <div ng-messages="user_form.username.$error" ng-show="user_form.username.$dirty">
         <div ng-message="required">
-          You forgot to enter a username...
+          Username is required
         </div>
-        <div ng-message="valid">
-          Username must be valid
+        <div ng-message="pattern">
+          Username must contain only letters and numbers
+        </div>
+        <div ng-message="minlength">
+          Username must be at least 8 characters long
         </div>
       </div>
-
-      <input id="username" name="username" ng-model="username" type="text" username-valid required />
-    </fieldset>
+      <!-- Input -->
+      <input id="username" name="username" ng-model="username" ng-model-options="{ debounce: 800 }" type="text" ng-pattern="/^(?=.*\D)[-\w]+$/" ng-minlength=8 required />
+    </div>
 
 
 <!-- EMAIL -->
-    <fieldset class="full-group">
-      <%= label_tag :email, "Enter the user's email address", class: 'small-label' %>
+    <div class='form-block'>
+      <%= label_tag :email, "Email", class: 'small-label' %>
 
-      <div ng-messages="user_form.email.$error">
+      <div ng-messages="user_form.email.$error" ng-show="user_form.email.$dirty">
         <div ng-message="required">
-          You forgot to enter your email...
+          Email is required
         </div>
         <div ng-message="email">
           Not a valid email
@@ -60,13 +67,10 @@
         </div>
       </div>
 
-      <input id="email" name="email" ng-model="email" type="email" email-unique required />
-    </fieldset>
+      <input id="email" name="email" ng-model="email" ng-model-options="{ debounce: 800 }" type="email" email-unique required />
+    </div>
 
-    <%= submit_tag 'Invite User', class: 'button button-green', "ng-class" => "{ button_progress: sending }" %>
+    <input name="commit" type="submit" value="Add User" ng-disabled="user_form.$invalid">
   </form>
 
-  <ul>
-    <li ng-repeat="user in users">{{ user.first_name }}</li>
-  </ul>
 </div>
